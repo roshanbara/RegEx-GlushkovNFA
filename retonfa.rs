@@ -298,6 +298,8 @@ fn augment(regexp: &Rc<Regex>, cnt: &mut u8) -> Rc<Regex> {
 
 fn main() {
     let x = Rc::new(Or(Rc::new(Concat(Rc::new(Letter(2)),Rc::new(Concat(Rc::new(Star(Rc::new(Letter(1)))), Rc::new(Letter(2)))))), Rc::new(Concat(Rc::new(Letter(2)), Rc::new(Star(Rc::new(Concat(Rc::new(Letter(2)), Rc::new(Letter(1))))))))));
+    // 1*2*112*
+    // let x = Rc::new(Concat(Rc::new(Star(Rc::new(Letter(1)))), Rc::new(Concat(Rc::new(Star(Rc::new(Letter(2)))),Rc::new(Concat(Rc::new(Letter(1)), Rc::new(Concat(Rc::new(Letter(1)), Rc::new(Star(Rc::new(Letter(2))))))))))));
     let mut cnt = 1;
     let a = augment(&x, &mut cnt); 
     // let a = Rc::new(Or(Rc::new(Concat(Rc::new(Letter(12)),Rc::new(Concat(Rc::new(Star(Rc::new(Letter(21)))), Rc::new(Letter(32)))))), Rc::new(Concat(Rc::new(Letter(42)), Rc::new(Star(Rc::new(Concat(Rc::new(Letter(52)), Rc::new(Letter(61))))))))));
@@ -320,6 +322,9 @@ fn main() {
     println!("F: {:?}", F_set);
     println!("NFA Adjacency Matrix : {:?}", array);
     let s: &str = "221212121";
+
+    // let s: &str = "112211222";
+
 
     if s.len() == 0 && matches!(findLambda(&a).deref(), Eps()) {
         println!("Accepted");
